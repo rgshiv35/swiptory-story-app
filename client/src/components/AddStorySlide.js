@@ -28,24 +28,27 @@ function getStepContent(step) {
       return "unknown step";
   }
 }
-function Slide({ onClose }) {
+function AddStorySlide({ onClose }) {
   const [slideList, setSlideList] = useState([
     { slide: "" },
     { slide: "" },
     { slide: "" },
   ]);
   const [steps, setSteps] = useState(3);
+  const handleSelect = (index) => {
+    setActiveStep(index);
+  };
   const handleSlideAdd = () => {
     setSlideList([...slideList, { slide: "" }]);
     setSteps(steps + 1);
-    setActiveStep(activeStep + 1);
+    setActiveStep(steps);
   };
   const handleSlideRemove = (index) => {
     const slist = [...slideList];
     slist.splice(index, 1);
     setSlideList(slist);
     setSteps(steps - 1);
-    setActiveStep(activeStep - 1);
+    setActiveStep(index - 1);
   };
 
   const methods = useForm({
@@ -76,7 +79,8 @@ function Slide({ onClose }) {
       category6: "",
     },
   });
-  const [activeStep, setActiveStep] = useState(2);
+  const [activeStep, setActiveStep] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(2);
 
   const handlePost = (data) => {
     if (activeStep == steps - 1) {
@@ -106,16 +110,23 @@ function Slide({ onClose }) {
                 {slideList.map((singleSlide, index) => (
                   <div key={index}>
                     <div className="allslides">
-                      <div className="slide-box" id="slide-one">
+                      <div
+                        className="slide-box"
+                        id="slide-one"
+                        onClick={() => {
+                          handleSelect(index);
+                          console.log("index is", { index });
+                        }}
+                      >
                         Slide {index + 1}
-                        {index > 2 && (
-                          <img
-                            src={closeButton}
-                            className="slide-close-button"
-                            onClick={() => handleSlideRemove(index)}
-                          />
-                        )}
                       </div>
+                      {index > 2 && (
+                        <img
+                          src={closeButton}
+                          className="slide-close-button"
+                          onClick={() => handleSlideRemove(index)}
+                        />
+                      )}
                       {slideList.length - 1 === index &&
                         slideList.length < 6 && (
                           <div
@@ -134,34 +145,35 @@ function Slide({ onClose }) {
               <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(handlePost)}>
                   {getStepContent(activeStep)}
-
-                  <button
-                    className="previousButton"
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                  >
-                    Previous
-                  </button>
-                  <button
-                    className="nextButton"
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    disabled={activeStep == steps - 1}
-                  >
-                    Next
-                    {/* {activeStep === steps - 1 ? "Finish" : "Next"} */}
-                  </button>
-                  <button
-                    className="postButton"
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    disabled={activeStep != steps - 1}
-                    onClick={onClose}
-                  >
-                    Post
-                  </button>
+                  <div>
+                    <button
+                      className="previousButton"
+                      disabled={activeStep === 0}
+                      onClick={handleBack}
+                    >
+                      Previous
+                    </button>
+                    <button
+                      className="nextButton"
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                      disabled={activeStep == steps - 1}
+                    >
+                      Next
+                      {/* {activeStep === steps - 1 ? "Finish" : "Next"} */}
+                    </button>
+                    <button
+                      className="postButton"
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      disabled={activeStep != steps - 1}
+                      onClick={onClose}
+                    >
+                      Post
+                    </button>
+                  </div>
                 </form>
               </FormProvider>
             </div>
@@ -173,5 +185,4 @@ function Slide({ onClose }) {
     </>
   );
 }
-
-export default Slide;
+export default AddStorySlide;
