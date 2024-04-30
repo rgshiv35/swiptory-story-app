@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-insta-stories": "^2.6.2",
+    "react-toastify": "^10.0.5"
+  }
+}
