@@ -10,6 +10,7 @@ mongoose.connect(process.env.MONGO_URL)
 .catch((err)=>console.log('Database not connected',err))
 
 //middleware
+app.use(cors)
 app.use(express.json())
 
 

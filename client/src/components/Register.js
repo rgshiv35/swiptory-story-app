@@ -4,6 +4,8 @@ import eyeClosed from "../assets/eye-closed.png";
 import eyeOpen from "../assets/eye-open.png";
 import closeButton from "../assets/closeIcon.jpg";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
+import {toast} from 'react-hot-toast'
 
 function Register({ onClose }) {
 
@@ -32,9 +34,24 @@ function Register({ onClose }) {
     }
   };
   
-  const handleSubmit=(e)=>{
+  const handleSubmit=async(e)=>{
     e.preventDefault();
-    
+    const {username, password}=formData
+    try {
+      const response= await axios.post('http://localhost:8000/register',{
+        username,password
+      })
+      if(response.error){
+        toast.error(formData.error)
+      }
+      else{
+        toast.success('Registeration successfull')
+        navigate("/dashboard")
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    // axios.get('/')
   }
   return (
     <>
@@ -45,7 +62,7 @@ function Register({ onClose }) {
             <div id="signInHeader" className="center">
             Register to SwipTory 
             </div>
-            <form onSubmit={handleSubmit}>
+            <form>
               <div className="formInput-container">
                 <div className="input-label">
                   <p id="username">Username</p>
@@ -76,7 +93,7 @@ function Register({ onClose }) {
                 </div>
               </div>
               <div>
-                <button className="loginButton" type="submit">
+                <button className="loginButton" type="submit" onClick={(e)=>handleSubmit(e)}>
                   Register
                 </button>
               </div>

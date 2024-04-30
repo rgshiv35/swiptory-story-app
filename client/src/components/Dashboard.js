@@ -4,20 +4,21 @@ import Filters from './Filters';
 import BookmarkSharpIcon from '@mui/icons-material/BookmarkSharp';
 import profile from '../assets/profilepic.png'
 import MenuIcon from '@mui/icons-material/Menu';
+import AddStorySlide from './AddStorySlide'
 
 function Header() {
-  const [menuclick,setMenuclick]=useState(false);
-  const handle_menu=()=>{
-    if(menuclick){
-      setMenuclick(false)
-      console.log("if clause");
-    }
-    else{
-      setMenuclick(true)
-      console.log("else clause");
-    }
-    // alert("hello");
-  }
+  // const [menuclick,setMenuclick]=useState(false);
+  // const handle_menu=()=>{
+  //   if(menuclick){
+  //     setMenuclick(false)
+  //     console.log("if clause");
+  //   }
+  //   else{
+  //     setMenuclick(true)
+  //     console.log("else clause");
+  //   }
+  // }
+  const [addstory,setAddStory]=useState(false)
   return (
     <>
     <nav className={styles.header}>
@@ -26,19 +27,20 @@ function Header() {
       </div>
       <div className={styles.header_options}>
         <button className={styles.header_button}><BookmarkSharpIcon/>Bookmarks</button>
-        <button className={styles.header_button }>Add story</button>
+        <button className={styles.header_button } onClick={()=>setAddStory(true)}>Add story</button>
         <img className={styles.profile_img} src={profile} alt='profile'/>
-        <MenuIcon className={styles.menu_icon} onClick={handle_menu}/>
+        <MenuIcon className={styles.menu_icon} />
       </div>
-      {/* <div>
-      if(menuclick){
-        <>
-        <h1>hello</h1>
-        </>
-      }
-      </div> */}
+      
     </nav>
       <Filters/>
+      {addstory && (
+        <AddStorySlide
+          onClose={() => {
+            setAddStory(false);
+          }}
+        />
+      )}
     </>
   )
 }

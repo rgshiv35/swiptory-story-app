@@ -1,4 +1,4 @@
-import './SingIn.css'
+import './SignIn.css'
 import React, { useState } from "react";
 import eyeClosed from "../assets/eye-closed.png";
 import eyeOpen from "../assets/eye-open.png";
@@ -31,7 +31,7 @@ function SignIn({ onClose }) {
 
   const handleSubmit=(e)=>{
     e.preventDefault();
-    axios.get('/')
+    // axios.get('/')
   }
 
   return (
