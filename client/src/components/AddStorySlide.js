@@ -8,7 +8,12 @@ import StoryForm3 from "./SlidePages/StoryForm3";
 import StoryForm4 from "./SlidePages/StoryForm4";
 import StoryForm5 from "./SlidePages/StoryForm5";
 import StoryForm6 from "./SlidePages/StoryForm6";
-import { useForm, FormProvider } from "react-hook-form";
+import {
+  useForm,
+  FormProvider,
+  Controller,
+  useFormContext,
+} from "react-hook-form";
 
 function getStepContent(step) {
   switch (step) {
@@ -28,6 +33,51 @@ function getStepContent(step) {
       return "unknown step";
   }
 }
+const BasicForm = () => {
+  const { control } = useFormContext();
+  return (
+    <>
+      <Controller
+        control={control}
+        name="heading1"
+        render={({ field }) => (
+          <textarea
+            id="first-name"
+            label="First Name"
+            placeholder="Enter Your First Name"
+            {...field}
+          />
+        )}
+      />
+
+      <Controller
+        control={control}
+        name="description1"
+        render={({ field }) => (
+          <textarea
+            id="last-name"
+            label="Last Name"
+            placeholder="Enter Your Last Name"
+            {...field}
+          />
+        )}
+      />
+
+      <Controller
+        control={control}
+        name="imageUrl1"
+        render={({ field }) => (
+          <textarea
+            id="nick-name"
+            label="Nick Name"
+            placeholder="Enter Your Nick Name"
+            {...field}
+          />
+        )}
+      />
+    </>
+  );
+};
 function AddStorySlide({ onClose }) {
   const [slideList, setSlideList] = useState([
     { slide: "" },
@@ -87,7 +137,8 @@ function AddStorySlide({ onClose }) {
       fetch("https://jsonplaceholder.typicode.com/comments")
         .then((data) => data.json())
         .then((res) => {
-          console.log(res);
+          //console.log(res);
+          console.log(data);
         });
     }
   };
@@ -169,7 +220,8 @@ function AddStorySlide({ onClose }) {
                       color="primary"
                       type="submit"
                       disabled={activeStep != steps - 1}
-                      onClick={onClose}
+                      // onClick={onClose}
+                      onClick={handlePost}
                     >
                       Post
                     </button>

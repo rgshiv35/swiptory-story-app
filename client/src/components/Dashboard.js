@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import styles from "./Dashboard.module.css";
 import Filters from "./Filters";
 import AllStory from "./AllStory";
@@ -6,6 +6,8 @@ import BookmarkSharpIcon from "@mui/icons-material/BookmarkSharp";
 import profile from "../assets/profilepic.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import AddStorySlide from "./AddStorySlide";
+
+const StoryContext = createContext();
 
 function Header() {
   // const [menuclick,setMenuclick]=useState(false);
@@ -20,6 +22,7 @@ function Header() {
   //   }
   // }
   const [addstory, setAddStory] = useState(false);
+  const [storyData, setStoryData] = useState();
   return (
     <>
       <nav className={styles.header}>

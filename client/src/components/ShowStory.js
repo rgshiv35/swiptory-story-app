@@ -35,15 +35,19 @@ export default function ShowStory({ onClose }) {
       setHeartImage(whiteHeartButton);
     }
   };
-  //   const notify = () => {
-  //     toast.success("Link copied to clipboard");
-  //   };
-  //   const [story, setStory] = useState([
-  //     {
-  //       url: "https://www.thespruceeats.com/thmb/QjCQ4RTjmnhrovGkuJWzZCXYFX8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-90053856-588b7aff5f9b5874ee534b04.jpg",
-  //       duration: 2000,
-  //     },
-  //   ]);
+  const notify = () => {
+    toast.success("Link copied to clipboard");
+  };
+  const story = [
+    {
+      url: "https://www.thespruceeats.com/thmb/QjCQ4RTjmnhrovGkuJWzZCXYFX8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-90053856-588b7aff5f9b5874ee534b04.jpg",
+      duration: 2000,
+    },
+    {
+      url: "https://i.pinimg.com/736x/21/22/5a/21225a3d8a95be9dca2b91913c8ffcea.jpg",
+      duration: 2000,
+    },
+  ];
   return (
     <>
       <div className="modal">
@@ -61,10 +65,10 @@ export default function ShowStory({ onClose }) {
             <img
               src={storyShareButton}
               className="story-share-modal"
-              // onClick={notify}
+              onClick={notify}
             />
           </CopyToClipboard>
-          {/* <ToastContainer className="copy-notification" /> */}
+          <ToastContainer className="copy-notification" />
 
           <img
             src={saveImage}
@@ -76,12 +80,12 @@ export default function ShowStory({ onClose }) {
             className="story-heart-modal"
             onClick={handleFavorite}
           />
-          {/* <Stories
+          <Stories
             stories={story}
             defaultInterval={1500}
-            width={432}
-            height={650}
-          /> */}
+            width={352}
+            height={487}
+          />
         </div>
       </div>
     </>

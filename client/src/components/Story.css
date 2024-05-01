@@ -8,8 +8,8 @@
 }
 .allStorycontainer {
   margin-top: 50px;
-  margin-left: 50px;
   display: flex;
+  justify-content: space-around;
 }
 .storyBox {
   /* background-color: linear-gradient(black, white 40%, black); */
